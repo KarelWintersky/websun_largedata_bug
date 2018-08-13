@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ловим баг в регулярках</title>
+    <style type="text/css">
+        ul li {
+            padding-bottom: 1em;
+        }
+    </style>
+    <script type="text/javascript">
+        function $$(id) {
+            if (typeof id == 'string') {
+                return document.getElementById(id);
+            }
+            return id;
+        }
+        function RunRender() {
+            var data_count = +$$('count_data').value;
+            var url = 'render.php?limit='+data_count;
+            window.open(url, '_blank')
+        }
+
+        function init() {
+            var el = $$('launch');
+            el[window.addEventListener ? 'addEventListener' : 'attachEvent']( window.addEventListener ? 'click' : 'onclick', RunRender, false);
+        }
+
+    </script>
+</head>
+<body onload="init()">
+
+Все ссылки откроются в новом окне.
+
+<ul>
+    <li>
+        <a target="_blank" href="raw.php">Сырые данные (все)</a>
+    </li>
+    <li>
+        <a target="_blank" href="render.php?limit=50">Рендер websun, 50 элементов</a>
+    </li>
+    <li>
+        <a target="_blank" href="render.php?limit=150">Рендер websun, 150 элементов</a>
+    </li>
+    <li>
+        <a target="_blank" href="render.php?limit=300">Рендер websun, 300 элементов</a>
+    </li>
+    <li>
+        <a target="_blank" href="render.php?limit=400">Рендер websun, 400 элементов</a>
+    </li>
+    <li>
+        <input type="text" id="count_data" value="100">
+        <button id="launch">Показать</button>
+    </li>
+</ul>
+
+</body>
+</html>
