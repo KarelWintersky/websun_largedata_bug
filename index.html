@@ -7,6 +7,9 @@
         ul li {
             padding-bottom: 1em;
         }
+        .custom * {
+            font-size: large;
+        }
     </style>
     <script type="text/javascript">
         function $$(id) {
@@ -49,10 +52,16 @@
         <a target="_blank" href="render.php?limit=400">Рендер websun, 400 элементов</a>
     </li>
     <li>
-        <input type="text" id="count_data" value="100">
-        <button id="launch">Показать</button>
+        <div class="custom">
+            Рендер с кастомным количеством элементов: <br/>
+            <input type="text" id="count_data" value="100">
+            <button id="launch">Показать</button>
+        </div>
     </li>
 </ul>
+
+<hr/>
+<a href="phpinfo.php" target="_blank">PHPInfo</a>
 
 </body>
 </html>
