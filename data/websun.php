@@ -637,7 +637,13 @@ class websun {
 				/sx', 
 				array($this, 'parse_if'), 
 				$template
-			); 
+			);
+
+		if ($out === NULL) {
+            printf("Find_and_parse_if REPORT: Template length = %s , PCRE Error is <strong>%s</strong><br>",
+                strlen($template), array_flip(get_defined_constants(true)['pcre'])[preg_last_error()]);
+        }
+
 		 	// пояснения к рег. выражению см. в find_and_parse_cycle
 		
 		if ($this->profiling) 

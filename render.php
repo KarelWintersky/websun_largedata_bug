@@ -21,7 +21,7 @@ $inner_html_data = [
 
 $return = websun_parse_template_path($inner_html_data, $template_file_name /* , $template_dir*/);
 
-echo "Count : {$get_limit}, used template `{$template_file_name}` <hr>" . PHP_EOL;
+echo "Elements count : {$get_limit}, used template `{$template_file_name}` <hr>" . PHP_EOL;
 
 echo $return;
 
