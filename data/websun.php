@@ -352,21 +352,11 @@ class websun {
 		$template = str_replace('\\\\', "\x01", $template); 	// убираем двойные слэши
 		$template = str_replace('\*', "\x02", $template);	// и экранированные звездочки
 		
-		// С 0.1.51 отключили
-		// $template = preg_replace_callback( // дописывающие модули
-		// 	'/
-		// 	{\*
-		// 	&(\w+)
-		// 	(?P<args>\([^*]*\))?
-		// 	\*}
-		// 	/x', 
-		// 	array($this, 'addvars'), 
-		// 	$template
-		// 	);
-		
 		$template = $this->find_and_parse_cycle($template);
 		
 		$template = $this->find_and_parse_if($template);
+
+		$template_len = strlen($template);
 		
 		$template = preg_replace_callback( // переменные, шаблоны и функции
 				'/
@@ -387,6 +377,11 @@ class websun {
 				array($this, 'parse_vars_templates_functions'), 
 				$template
 			);
+
+        if ($template === NULL) {
+            $template = printf(__FUNCTION__ . " ERROR: Template length = %s , PCRE Error is <strong>%s</strong><br>",
+                strlen($template_len), array_flip(get_defined_constants(true)['pcre'])[preg_last_error()]);
+        }
 		
 		$template = str_replace("\x01", '\\\\', $template); // возвращаем двойные слэши обратно
 		$template = str_replace("\x02", '*', $template); // а звездочки - уже без экранирования 
@@ -546,7 +541,12 @@ class websun {
 			);
 			// инвертный класс - [^{]* - для быстрого совпадения
 			// непрерывных цепочек статистически наиболее часто встречающихся символов 
-		
+
+        if ($out === NULL) {
+            $out = printf(__FUNCTION__ . " REPORT: Template length = %s , PCRE Error is <strong>%s</strong><br>",
+                strlen($template), array_flip(get_defined_constants(true)['pcre'])[preg_last_error()]);
+        }
+
 		if ($this->profiling) 
 			$this->write_time(__FUNCTION__, $start, microtime(1));
 		
@@ -640,7 +640,7 @@ class websun {
 			);
 
 		if ($out === NULL) {
-            printf("Find_and_parse_if REPORT: Template length = %s , PCRE Error is <strong>%s</strong><br>",
+            $out = printf(__FUNCTION__ . " REPORT: Template length = %s , PCRE Error is <strong>%s</strong><br>",
                 strlen($template), array_flip(get_defined_constants(true)['pcre'])[preg_last_error()]);
         }
 

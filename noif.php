@@ -20,14 +20,14 @@ if (count($authors_list) < $get_limit) {
 
 }
 
-$template_dir = "template/";
+$template_dir = "templates/";
 $template_file_name = "no_if.html";
 $inner_html_data = [
     'all_authors_count'     => $authors_count,
     'all_authors_list'      => $authors_list
 ];
 
-$return = websun_parse_template_path($inner_html_data, $template_file_name /* , $template_dir*/);
+$return = websun_parse_template_path($inner_html_data, $template_file_name, $template_dir);
 
 echo "Elements count : {$get_limit}, used template `{$template_file_name}` <hr>" . PHP_EOL;
 
