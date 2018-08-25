@@ -6,6 +6,14 @@
  
 $GLOBAL_DATA = [];
 
+function pcre_jit_disable(){
+    ini_set('pcre.jit', 0);
+}
+
+function pcre_jit_enable(){
+    ini_set('pcre.jit', 1);
+}
+
 function preload_data($filename)
 {
     $file_content = file_get_contents($filename);

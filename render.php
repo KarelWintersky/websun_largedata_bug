@@ -18,6 +18,8 @@ $inner_html_data = [
     'all_authors_list'      => $authors_list
 ];
 
+pcre_jit_disable();
+
 $return = websun_parse_template_path($inner_html_data, $template_file_name, $template_dir);
 
 echo "Elements count : {$get_limit}, used template `{$template_file_name}` <hr>" . PHP_EOL;
