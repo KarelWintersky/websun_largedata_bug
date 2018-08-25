@@ -23,7 +23,7 @@ if (count($authors_list) < $get_limit) {
 $template_dir = "templates/";
 $template_file_name = "no_if.html";
 $inner_html_data = [
-    'all_authors_count'     => $authors_count,
+    'all_authors_count'     => count($authors_list),
     'all_authors_list'      => $authors_list
 ];
 
